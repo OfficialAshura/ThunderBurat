@@ -1,0 +1,77 @@
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/REDzHUB/LibraryV2/main/redzLib")))()
+
+MakeWindow({
+  Hub = {
+    Title = "ThunderBurat",
+    Animation = "by : Ashura&Cloud"
+  },
+  Key = {
+    KeySystem = true,
+    Title = "Key System",
+    Description = "Ashuraa",
+    KeyLink = "https://link-hub.net/1246644/get-your-key",
+    Keys = {"Key_56786"},
+    Notifi = {
+      Notifications = true,
+      CorrectKey = "Running the Script...",
+      Incorrectkey = "The key is incorrect",
+      CopyKeyLink = "Copied to Clipboard"
+    }
+  }
+})
+
+MinimizeButton({
+  Image = "https://images.app.goo.gl/u8R4NQtJdREY3MSh6",
+  Size = {40, 40},
+  Color = Color3.fromRGB(10, 10, 10),
+  Corner = true,
+  Stroke = false,
+  StrokeColor = Color3.fromRGB(255, 0, 0)
+})
+
+local Main = MakeTab({Name = "Main"})
+
+MakeNotifi({
+  Title = "ThunderBurat",
+  Text = "WelcomeToThunderBurat",
+  Time = 3
+})
+
+local section = AddSection(Main, {"rolling"})
+
+-- Configuration
+local autoRollDelay = 5 -- seconds
+local autoRollEnabled = false
+
+-- Get Pet Go service
+local PetGoService = game:GetService("ReplicatedStorage"):WaitForChild("PetGo")
+
+-- Function to roll pets
+local function rollPets()
+    local args = {}
+    PetGoService:WaitForChild("RollPet"):FireServer(unpack(args))
+end
+
+-- Toggle auto-roll function
+local function toggleAutoRoll()
+    autoRollEnabled = not autoRollEnabled
+    if autoRollEnabled then
+        autoRollLoop()
+    end
+end
+
+-- Auto-roll loop
+local function autoRollLoop()
+    while autoRollEnabled do
+        rollPets()
+        wait(autoRollDelay)
+    end
+end
+
+local Toggle = AddToggle(Main, {
+  Name = "Auto Rolling",
+  Default = false,
+  Callback = function(state)
+    toggleAutoRoll()
+  end
+})
