@@ -1,59 +1,102 @@
-local redzlib = loadstring(game:HttpGet('https://raw.githubusercontent.com/REDzHUB/Redzlib/main/Source.lua')))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV4/main/Source.lua"))()
+
+Library:SetTheme("Dark") -- https://raw.githubusercontent.com/REDzHUB/RedzLibV4/main/Themes.lua
+
+Library:SetTransparency(0.1) -- 0, 1
+
+Library:GetThemes() -- void, return = table
+
+Library:GetIcon("Thunder")
+
+-- ///////// 
+
+Library.info.PlaceName
+
+Library.info.Version
+
+Instance:Destroy()
+
+Instance:Visible(false)
 
 local Window = redzlib:MakeWindow({
-  Menu = {
-    Title = "ThunderBurat",
-  },
-  LoadAnim = {
-    Active = true,
-    Title = "by : Ashura&Cloud",
-    WaitTime = 0.5
-  }
+  Title = "ThunderBurat",
+  SubTitle = "by : Ashura",
+  LoadText = "ThunderBurat",
+  Flags = "ThunderBurat | Example.lua"
 })
 
-local Tab = Window:MakeTab({
-  Name = "Main",
-  Image = "rbxassetid://9142678957"
-})
+--[[
+  Window:Set("ThunderBurat")
+]]
 
-redzlib:MakeNotifi({
-  Title = "ThunderHubPetGo",
-  Text = "AshuraHandsome",
+local Notify = Library:MakeNotify({
+  Title = "ThunderHub",
+  Text = "ThunderHub executed",
   Time = 3
 })
+
+--[[
+  Notify:Wait() -- Wait for the notification to end
+]]
+
+local Tab = Window:MakeTab({Name = "Main", Icon = "Home"})
+
+--[[
+  Tab:Set("Main")
+]]
 
 local Toggle = MainTab:AddToggle({
   Name = "AutoRoll",
   Default = false,
   Callback = function(Value)
-   
- while true do
+while true do
 game:GetService("Players").LocalPlayer:WaitForChild("Rolling Egg Opening")
 wait()
   end
 })
 
-local Button = MainTab:AddButton({
-  Name = "Reset",
-  Callback = function()
+--[[
+  Toggle:Set(false)
+  
+  Toggle:Callback(function(Value)
+  
+  end)
+]]
 
-game.Players.LocalPlayer.Character.Humanoid.Health = 0
-  end
+MainTab:AddDiscordInvite({
+  DiscordTitle = "ThunderBurat",
+  DiscordIcon = "rbxassetid://15298567397",
+  DiscordLink = "https://discord.gg/wSzHTE6sr7"
 })
 
-local Tab = Window:MakeTab({
-  Name = "Player",
-  Image = "rbxassetid://9142678957"
+Window:AddMinimizeButton({
+  Button = {
+    -- Button Properties
+    Image = "rbxassetid://9142678957"
+  },
+  UICorner = {true,
+    -- Corner Properties
+    CornerRadius = UDim.new(0.5, 0)
+  },
+  UIStroke = {True, {
+    -- Stroke Properties
+  }}
 })
 
-local Slider = Tab:AddSlider({
+local Tab = Window:MakeTab({Name = "Player", Icon = "Player"})
+
+--[[
+  Tab:Set("Player")
+]]
+
+local Slider = PlayerTab:AddSlider({
   Name = "Speed",
-  MinValue = 0,
+  MinValue = 1,
   MaxValue = 100,
   Default = 0,
-  Increase = 0.1,
+  Increase = 1,
   Callback = function(Value)
-local function setSpeed()
+    local function setSpeed()
     humanoid.WalkSpeed = speedBoost
 end
 
@@ -65,3 +108,11 @@ runs
 setSpeed()
   end
 })
+
+--[[
+  Slider:Set(7)
+  
+  Slider:Callback(function(Value)
+    
+  end)
+]]
