@@ -1,75 +1,67 @@
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/REDzHUB/LibraryV2/main/redzLib")))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/Redzlib/main/Source.lua"))()
 
-MakeWindow({
-  Hub = {
+local Window = redzlib:MakeWindow({
+  Menu = {
     Title = "ThunderBurat",
-    Animation = "by : Ashura&Cloud"
   },
-  Key = {
-    KeySystem = true,
-    Title = "Key System",
-    Description = "Ashuraa",
-    KeyLink = "https://link-hub.net/1246644/get-your-key",
-    Keys = {"Key_56786"},
-    Notifi = {
-      Notifications = true,
-      CorrectKey = "Running the Script...",
-      Incorrectkey = "The key is incorrect",
-      CopyKeyLink = "Copied to Clipboard"
-    }
+  LoadAnim = {
+    Active = true,
+    Title = "by : Ashura&Cloud",
+    WaitTime = 0.5
   }
 })
 
-MinimizeButton({
-  Image = "https://images.app.goo.gl/u8R4NQtJdREY3MSh6",
-  Size = {40, 40},
-  Color = Color3.fromRGB(10, 10, 10),
-  Corner = true,
-  Stroke = false,
-  StrokeColor = Color3.fromRGB(255, 0, 0)
+local Tab = Window:MakeTab({
+  Name = "Main",
+  Image = "rbxassetid://9142678957"
 })
 
-local Main = MakeTab({Name = "Main"})
-
-MakeNotifi({
-  Title = "ThunderBurat",
-  Text = "WelcomeToThunderBurat",
+redzlib:MakeNotifi({
+  Title = "ThunderHubPetGo",
+  Text = "AshuraHandsome",
   Time = 3
 })
 
--- Configuration
-local autoRollDelay = 5 -- seconds
-local autoRollEnabled = false
-
--- Get Pet Go service
-local PetGoService = game:GetService("ReplicatedStorage"):WaitForChild("PetGo")
-
--- Function to roll pets
-local function rollPets()
-    local args = {}
-    PetGoService:WaitForChild("RollPet"):FireServer(unpack(args))
-end
-
--- Toggle auto-roll function
-local function toggleAutoRoll()
-    autoRollEnabled = not autoRollEnabled
-    if autoRollEnabled then
-        autoRollLoop()
-    end
-end
-
--- Auto-roll loop
-local function autoRollLoop()
-    while autoRollEnabled do
-        rollPets()
-        wait(autoRollDelay)
-    end
-end
-
-local Toggle = AddToggle(Main, {
-  Name = "Auto Rolling",
+local Toggle = MainTab:AddToggle({
+  Name = "AutoRoll",
   Default = false,
-  Callback = function(state)
-    toggleAutoRoll()
+  Callback = function(Value)
+   
+ while true do
+game:GetService("Players").LocalPlayer:WaitForChild("Rolling Egg Opening")
+wait()
+  end
+})
+
+local Button = MainTab:AddButton({
+  Name = "Reset",
+  Callback = function()
+
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+  end
+})
+
+local Tab = Window:MakeTab({
+  Name = "Player",
+  Image = "rbxassetid://9142678957"
+})
+
+local Slider = Tab:AddSlider({
+  Name = "Speed",
+  MinValue = 0,
+  MaxValue = 100,
+  Default = 0,
+  Increase = 0.1,
+  Callback = function(Value)
+local function setSpeed()
+    humanoid.WalkSpeed = speedBoost
+end
+
+character:WaitForChild("Humanoid").Died:Connect(function()
+    setSpeed()
+end)
+
+runs
+setSpeed()
   end
 })
