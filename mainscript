@@ -37,8 +37,6 @@ MakeNotifi({
   Time = 3
 })
 
-local section = AddSection(Main, {"rolling"})
-
 -- Configuration
 local autoRollDelay = 5 -- seconds
 local autoRollEnabled = false
